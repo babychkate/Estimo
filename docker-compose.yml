@@ -1,0 +1,15 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: tasktracker-rabbitmq
+    ports:
+      - "5672:5672"    # AMQP — обмін даними
+      - "15672:15672"  # веб-інтерфейс управління (guest / guest)
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+volumes:
+  rabbitmq-data:

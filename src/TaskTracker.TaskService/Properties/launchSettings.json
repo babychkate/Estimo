@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "TaskTracker.TaskService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:54633;http://localhost:54634"
+    }
+  }
+}
