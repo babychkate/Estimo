@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace TaskTracker.Contracts.Events;
 
 /// <summary>Результат закриття очікування.</summary>
@@ -16,12 +14,8 @@ public enum WaitingOutcome
 }
 
 /// <summary>Завдання створено. Початок потоку подій агрегату.</summary>
-public sealed class AssignmentCreated : IDomainEvent
+public sealed class AssignmentCreated : DomainEvent
 {
-    public Guid EventId { get; set; } = Guid.NewGuid();
-    public Guid AssignmentId { get; set; }
-    public DateTime OccurredAt { get; set; } = DateTime.UtcNow;
-
     public string Title { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
     public DateTime DueDate { get; set; }
@@ -29,22 +23,14 @@ public sealed class AssignmentCreated : IDomainEvent
 }
 
 /// <summary>Роботу над завданням розпочато.</summary>
-public sealed class AssignmentStarted : IDomainEvent
+public sealed class AssignmentStarted : DomainEvent
 {
-    public Guid EventId { get; set; } = Guid.NewGuid();
-    public Guid AssignmentId { get; set; }
-    public DateTime OccurredAt { get; set; } = DateTime.UtcNow;
-
     public string Title { get; set; } = string.Empty;
 }
 
 /// <summary>Відкрито очікування дії викладача; завдання переходить у стан «заблоковано».</summary>
-public sealed class WaitingOpened : IDomainEvent
+public sealed class WaitingOpened : DomainEvent
 {
-    public Guid EventId { get; set; } = Guid.NewGuid();
-    public Guid AssignmentId { get; set; }
-    public DateTime OccurredAt { get; set; } = DateTime.UtcNow;
-
     public Guid WaitingId { get; set; }
     public string AssignmentTitle { get; set; } = string.Empty;
     public string TeacherName { get; set; } = string.Empty;
@@ -54,12 +40,8 @@ public sealed class WaitingOpened : IDomainEvent
 }
 
 /// <summary>Очікування закрите; блокування з завдання знято.</summary>
-public sealed class WaitingClosed : IDomainEvent
+public sealed class WaitingClosed : DomainEvent
 {
-    public Guid EventId { get; set; } = Guid.NewGuid();
-    public Guid AssignmentId { get; set; }
-    public DateTime OccurredAt { get; set; } = DateTime.UtcNow;
-
     public Guid WaitingId { get; set; }
     public string AssignmentTitle { get; set; } = string.Empty;
     public string TeacherName { get; set; } = string.Empty;
@@ -75,12 +57,8 @@ public sealed class WaitingClosed : IDomainEvent
 /// (прив'язка за маскою *.completed), тому всі дані для перерахунку коефіцієнта
 /// точності мають бути всередині самої події.
 /// </summary>
-public sealed class AssignmentCompleted : IDomainEvent
+public sealed class AssignmentCompleted : DomainEvent
 {
-    public Guid EventId { get; set; } = Guid.NewGuid();
-    public Guid AssignmentId { get; set; }
-    public DateTime OccurredAt { get; set; } = DateTime.UtcNow;
-
     public string Title { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
     public int EstimatedMinutes { get; set; }
@@ -88,12 +66,8 @@ public sealed class AssignmentCompleted : IDomainEvent
 }
 
 /// <summary>Завдання скасовано; зі статистики точності виключається.</summary>
-public sealed class AssignmentCancelled : IDomainEvent
+public sealed class AssignmentCancelled : DomainEvent
 {
-    public Guid EventId { get; set; } = Guid.NewGuid();
-    public Guid AssignmentId { get; set; }
-    public DateTime OccurredAt { get; set; } = DateTime.UtcNow;
-
     public string Title { get; set; } = string.Empty;
     public string Reason { get; set; } = string.Empty;
 }
