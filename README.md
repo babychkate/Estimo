@@ -1,4 +1,4 @@
-# 🧩 TaskTracker
+# 🧩 ESTIMO
 
 **TaskTracker** is an event-sourced task tracking service built around a RabbitMQ topic exchange.
 Every change of state is an immutable event; the current state is never stored — it is recomputed by replaying the stream.
