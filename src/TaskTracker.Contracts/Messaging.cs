@@ -1,5 +1,7 @@
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Unicode;
 using TaskTracker.Contracts.Events;
 
 namespace TaskTracker.Contracts;
@@ -68,7 +70,8 @@ public static class Messaging
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
-            WriteIndented = true
+            WriteIndented = true,
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
         };
         options.Converters.Add(new JsonStringEnumConverter());
         return options;

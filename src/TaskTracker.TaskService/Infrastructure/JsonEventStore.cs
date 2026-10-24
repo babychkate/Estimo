@@ -4,8 +4,7 @@ using TaskTracker.Contracts;
 namespace TaskTracker.TaskService.Infrastructure;
 
 /// <summary>
-/// Сховище подій. Інтерфейс потрібен, щоб у ЛР №3 підмінити JSON-файл на
-/// базу даних, не торкаючись ані агрегату, ані контролера.
+/// Сховище подій
 /// </summary>
 public interface IEventStore
 {
@@ -17,9 +16,6 @@ public interface IEventStore
 /// <summary>
 /// Сховище подій у JSON-файлі. Події дописуються і ніколи не змінюються —
 /// це і є незмінна історія, з якої агрегат відновлює свій стан.
-///
-/// Файл, а не пам'ять, обраний свідомо: після перезапуску сервісу історія
-/// лишається, і можна наочно показати, що стан агрегату відтворюється реплеєм.
 /// </summary>
 public sealed class JsonEventStore : IEventStore
 {

@@ -8,9 +8,6 @@ namespace TaskTracker.TaskService.Infrastructure;
 /// <summary>
 /// Публікація подій у topic-обмінник.
 ///
-/// Сервіс зареєстрований як singleton: з'єднання з RabbitMQ дороге, відкривати
-/// його на кожен HTTP-запит — класична помилка.
-///
 /// Продюсер оголошує ТІЛЬКИ обмінник. Про черги й консюмерів він нічого не знає —
 /// у цьому й полягає слабка зв'язаність: щоб додати новий обробник, у цьому
 /// коді не треба міняти жодного рядка.
@@ -60,7 +57,7 @@ public sealed class RabbitMqPublisher : IDisposable
         var properties = _channel.CreateBasicProperties();
         properties.Persistent = true;                       // повідомлення переживе перезапуск брокера
         properties.ContentType = "application/json";
-        properties.MessageId = @event.EventId.ToString();   // знадобиться для ідемпотентності в ЛР №3
+        properties.MessageId = @event.EventId.ToString();
         properties.Type = @event.GetType().Name;
         properties.Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
         properties.Headers = new Dictionary<string, object>

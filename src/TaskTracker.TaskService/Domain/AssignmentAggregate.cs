@@ -65,8 +65,6 @@ public sealed class AssignmentAggregate
             Apply(@event);
     }
 
-    public bool Exists => _created;
-
     // ---------- Команди. Кожна: перевірити правила → породити подію. ----------
 
     public void Create(Guid id, string title, string category, DateTime dueDate, int estimatedMinutes)

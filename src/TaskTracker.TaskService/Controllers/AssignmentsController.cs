@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using TaskTracker.Contracts;
 using TaskTracker.TaskService.Domain;
 using TaskTracker.TaskService.Dto;
 using TaskTracker.TaskService.Infrastructure;
@@ -43,9 +42,7 @@ public sealed class AssignmentsController : ControllerBase
     public IActionResult Create([FromBody] CreateAssignmentRequest request)
     {
         var assignmentId = Guid.NewGuid();
-
-        // Історія порожня — агрегат чистий.
-        var aggregate = new AssignmentAggregate(Array.Empty<IDomainEvent>());
+        var aggregate = new AssignmentAggregate([]);
 
         try
         {

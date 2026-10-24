@@ -6,10 +6,6 @@ namespace TaskTracker.NotificationService;
 ///
 /// Будується ВИКЛЮЧНО з подій, що прийшли з брокера. Сервіс ніколи не звертається
 /// ні до TaskService, ні до його сховища подій.
-///
-/// Проекція тут не формальність: щоб написати осмислений лист на waiting.opened,
-/// сервісу потрібна назва завдання — а вона приходила раніше, в assignment.created.
-/// Тобто консюмер змушений тримати власний локальний стан.
 /// </summary>
 public sealed class AssignmentView
 {
@@ -32,8 +28,12 @@ public sealed class AssignmentView
 
     public override string ToString()
     {
-        var blocked = IsBlocked ? $" | ЗАБЛОКОВАНО: {WaitingTeacher}" : string.Empty;
         var actual = ActualMinutes is null ? string.Empty : $" | факт {ActualMinutes} хв";
-        return $"{Title} [{Category}] — {State} | план {EstimatedMinutes} хв{actual}{blocked}";
+        var blocked = IsBlocked
+            ? $" | ЗАБЛОКОВАНО: {WaitingTeacher} з {WaitingSince:dd.MM HH:mm}"
+            : string.Empty;
+
+        return $"{Title} [{Category}] — {State} | до {DueDate:dd.MM.yyyy} | " +
+               $"план {EstimatedMinutes} хв{actual}{blocked} | подій: {EventsApplied}";
     }
 }

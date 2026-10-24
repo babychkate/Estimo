@@ -3,6 +3,7 @@ using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using TaskTracker.Contracts.Events;
+using TaskTracker.Contracts;
 
 namespace TaskTracker.NotificationService;
 
@@ -97,6 +98,6 @@ public sealed class EmailSender
 
          --
          Надіслано автоматично системою Estimo
-         Подія: {@event.RoutingKey}, EventId: {@event.EventId}
+         Подія: {Messaging.RoutingKeys.WaitingOpened}, EventId: {@event.EventId}
          """;
 }
