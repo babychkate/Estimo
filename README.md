@@ -1,6 +1,6 @@
 # 🧩 ESTIMO
 
-**TaskTracker** is an event-sourced task tracking service built around a RabbitMQ topic exchange.
+**Estimo** is an event-sourced task tracking service built around a RabbitMQ topic exchange.
 Every change of state is an immutable event; the current state is never stored — it is recomputed by replaying the stream.
 
 Most task trackers assume work stalls because you stopped working on it. In practice it stalls because you are **waiting on someone else** — a review, an approval, a missing document. TaskTracker makes that wait a first-class concept: an open request blocks the task, notifies the other party by email, and the time spent blocked is measured. A second consumer compares planned against actual duration per task category, which surfaces where estimates are systematically wrong.
